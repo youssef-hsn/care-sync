@@ -12,7 +12,7 @@ i18n
     ns: ['common'],
     defaultNS: 'common',
     supportedLngs: ['ar', 'en'],
-    debug: false,
+    debug: import.meta.env.DEV,
     interpolation: {
       escapeValue: false,
     },
