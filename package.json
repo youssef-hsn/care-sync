@@ -6,11 +6,15 @@
     "client",
     "server"
   ],
+  "scripts": {
+    "dev": "concurrently \"yarn workspace client dev\" \"nodemon server/index.ts\""
+  },
   "dependencies": {
     "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
+    "concurrently": "^8.2.0",
     "dotenv": "^16.4.7",
     "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
