@@ -7,7 +7,8 @@
     "server"
   ],
   "scripts": {
-    "dev": "concurrently \"yarn workspace client dev\" \"nodemon server/index.ts\""
+    "dev": "concurrently \"yarn workspace client dev\" \"nodemon server/index.ts\"",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.21.2"
