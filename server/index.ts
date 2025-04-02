@@ -5,9 +5,15 @@ const PORT: number | string = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.get('api/test', (req: Request, res: Response) => {
-  res.send('Server is up and running');
+app.get('/status', (req: Request, res: Response) => {
+  res.json({ 
+    status: 'ok',
+    message: "Server is up",
+    timestamp: new Date().toISOString() 
+    });
 });
+
+export default app;
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
