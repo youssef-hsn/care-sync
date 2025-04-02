@@ -1,6 +1,5 @@
 {
   "name": "care-sync",
-  "packageManager": "yarn@4.6.0",
   "private": true,
   "workspaces": [
     "client",
