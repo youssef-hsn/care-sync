@@ -1,9 +1,8 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Suspense, useEffect } from 'react';
 import i18n from './i18n';
-import React from 'react';
 import '@/index.css';
-
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -21,9 +20,13 @@ const App: React.FC = () => {
   const { t } = useTranslation("common");
 
   return (
-    <Suspense fallback={<div>Loading...</div>}> 
-        <h1>{t('test')}</h1>
-    </Suspense>
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {/* Define your routes here */}
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 };
 
