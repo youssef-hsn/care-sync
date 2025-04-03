@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from './i18n';
-import '@/index.css';
 
 const App: React.FC = () => {
   useEffect(() => {
