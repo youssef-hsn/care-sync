@@ -3,6 +3,7 @@ import React, { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';
 import SignInPage from '@/pages/auth/signin';
+import LoadingPage from '@/pages/state/loading';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -21,7 +22,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingPage/>}>
         <Routes>
           <Route path='/signin' element={<SignInPage />} />
         </Routes>
