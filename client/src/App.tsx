@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import i18n from './i18n';
+import i18n from '@/i18n';
+import LoginPage from '@/pages/auth/login';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          {/* Define your routes here */}
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
