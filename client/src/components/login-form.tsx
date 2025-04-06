@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Button } from "@/components/atoms/button"
+import { Card, CardContent } from "@/components/atoms/card"
+import { Input } from "@/components/atoms/input"
+import { Label } from "@/components/atoms/label"
 import { useTranslation } from "react-i18next"
 import heroImage from "@/assets/secure-healthcare.png"
 
