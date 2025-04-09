@@ -1,6 +1,7 @@
 import React from "react";
 import { Label } from "@/components/atoms/label";
 import { Input } from "@/components/atoms/input";
+import { PasswordInput } from "@/components/molecules/password-input";
 
 interface LabeledInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
@@ -29,14 +30,16 @@ interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement>
 }
 
 
-export const PasswordInput: React.FC<PasswordInputProps> = ({
+export const LabeledPasswordInput: React.FC<PasswordInputProps> = ({
     label,
     children,
     ...inputProps
 }) => {
     return (
-        <LabeledInput label={label} labelFor="password" type="password" {...inputProps} >
+        <div className="grid gap-3">
+            <Label htmlFor={"password"}>{label}</Label>
+            <PasswordInput id={"password"} {...inputProps}/>
             {children?? null}
-        </LabeledInput>
+        </div>
     );
 };

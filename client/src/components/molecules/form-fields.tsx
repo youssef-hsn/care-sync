@@ -6,6 +6,7 @@ FormItem,
 FormLabel,
 FormMessage,
 } from "@/components/atoms/form";
+import { PasswordInput } from "./password-input";
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 label: string;
@@ -39,7 +40,7 @@ export const FormPassword: FC<FormInputProps> = ({
         <FormItem>
             <FormLabel>{label}</FormLabel>
             <FormControl>
-                <Input type="password" placeholder={placeholder} {...inputProps} />
+                <PasswordInput placeholder={placeholder} {...inputProps} />    
             </FormControl>
             <FormMessage />
         </FormItem>
