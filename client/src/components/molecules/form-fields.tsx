@@ -32,11 +32,16 @@ export const FormInput: FC<FormInputProps> = ({
     )
 };
 
-export const FormPassword: FC<FormInputProps> = ({
+interface FormPasswordProps extends FormInputProps {
+    strengthLabels?: string[];
+}
+
+export const FormPassword: FC<FormPasswordProps> = ({
     label,
     placeholder,
     value: propValue,
     onChange: propOnChange,
+    strengthLabels,
     ...inputProps
 }) => {
     const [password, setPassword] = useState<string>((propValue as string) || "");
@@ -52,9 +57,11 @@ export const FormPassword: FC<FormInputProps> = ({
         <FormItem>
             <FormLabel>{label}</FormLabel>
             <FormControl>
-                <PasswordInput placeholder={placeholder} value={password} onChange={handleChange} {...inputProps} />    
+            <PasswordInput placeholder={placeholder} value={password} onChange={handleChange} {...inputProps} />    
             </FormControl>
-            <PasswordStrength password={password}/>
+            <div className={`overflow-hidden transition-[height] duration-300 ${password ? 'h-10' : 'h-0'}`}>
+                {<PasswordStrength password={password} labels={strengthLabels} />}
+            </div>
             <FormMessage />
         </FormItem>
     )
