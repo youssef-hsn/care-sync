@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/atoms/button"
 import { useTranslation } from "react-i18next"
 import heroImage from "@/assets/secure-healthcare.png"
-import { LabeledInput, PasswordInput } from "../molecules/labeled-input"
+import { LabeledInput, LabeledPasswordInput as PasswordInput } from "../molecules/labeled-input"
 import FormWithHero from "../templates/form-with-hero"
 
 export function LoginForm({

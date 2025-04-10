@@ -1,12 +1,10 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Card, CardContent } from '../atoms/card';
 
 interface FormWithHeroProps extends React.ComponentProps<'div'> {
     heroImage: string;
     children?: React.ReactNode;
 }
-
-
 
 const FormWithHero: React.FC<FormWithHeroProps> = ({ heroImage, children }) => {
     return (
