@@ -6,6 +6,11 @@ This document explains the database schemas used in the Care-Sync project.
 
 **Our schema is defined using drizzle/pg-core typescript representation to give type saftey to quesries inside of each usecase**
 
+### Naming Rules
+- A table needs to be named in plural form
+- Each attribute is mentioned by snake_case inside of sql
+- Inside TS, camelCase is kept for code consistency
+
 ## Schema Versioning
 
 **The schema edits can be traced back using git since the schema is defined inside the server/src/db/tables directory**
