@@ -9,7 +9,7 @@ const REFRESH_TOKEN_EXPIRY = '24h';
 
 export interface TokenPayload {
   userId: number;
-  roles: string[];
+  roles: Set<String>;
 }
 
 export const hashPassword = async (password: string): Promise<string> => {
