@@ -1,5 +1,5 @@
 import request from 'supertest'
-import {app, server} from '../src/index'
+import {app, server} from '../app'
 
 describe('GET /status', () => {
   it('should respond with 200 to make sure API is up', async () => {
