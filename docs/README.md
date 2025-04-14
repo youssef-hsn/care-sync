@@ -19,3 +19,14 @@ To ensure a hierarchical system that can integrate seamlessly with Docusaurus in
 3. **Consistent Writing**: When writing your documentation, make it consistent to existing docs.
 
 > This is to ensure scalability and compatibility with the Docusaurus system in the possible future.
+
+# Naming Rules
+**This is to keep the code consistent accross the backend and the frontend.**
+
+1. **File Names**: Use `kebab-case` for all file names (e.g., `user-guide.md`, `api-reference.md`).
+
+2. **Variable/Function Names**: Use `camelCase` for all variable and function names (e.g., `getUserData`, `fetchDetails`).
+
+3. **Component Names**: Use `TitleCase` for all component names (e.g., `UserCard`, `NavBar`).
+
+> More specific rules can be found accross other documentation.
