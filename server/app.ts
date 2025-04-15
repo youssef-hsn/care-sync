@@ -12,4 +12,4 @@ const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-export { app, server };
+export { app };
