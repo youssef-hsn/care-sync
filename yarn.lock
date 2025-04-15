@@ -2862,6 +2862,7 @@ __metadata:
     ts-jest: "npm:^29.3.1"
     ts-node: "npm:^10.9.2"
     typescript: "npm:^5.8.2"
+    zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
 
@@ -2966,6 +2967,7 @@ __metadata:
     react-hook-form: "npm:^7.55.0"
     react-i18next: "npm:^15.4.1"
     react-router-dom: "npm:^7.4.1"
+    shared: "workspace:shared"
     tailwind-merge: "npm:^3.1.0"
     tailwindcss: "npm:^4.0.17"
     tw-animate-css: "npm:^1.2.5"
@@ -7136,6 +7138,14 @@ __metadata:
   checksum: 10c0/68733173026766fa0d9ecaeb07f0483f4c2dc70ca376b3b7c40b7cda909f94b0918f6c5ad5ce27a9160bdfb475efaa9d5e705a11d8eaae18f9835d20976028bc
   languageName: node
   linkType: hard
+
+"shared@workspace:shared":
+  version: 0.0.0-use.local
+  resolution: "shared@workspace:shared"
+  dependencies:
+    zod: "npm:^3.24.2"
+  languageName: unknown
+  linkType: soft
 
 "shebang-command@npm:^2.0.0":
   version: 2.0.0

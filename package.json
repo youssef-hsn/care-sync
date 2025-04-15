@@ -3,7 +3,8 @@
   "private": true,
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "shared"
   ],
   "scripts": {
     "dev": "concurrently \"yarn workspace client dev\" \"yarn workspace server dev\"",
@@ -18,5 +19,8 @@
     "ts-jest": "^29.3.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
   }
 }
