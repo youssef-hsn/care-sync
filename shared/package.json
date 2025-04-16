@@ -1,4 +1,7 @@
 {
   "name": "shared",
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.6.0",
+  "dependencies": {
+    "zod": "^3.24.2"
+  }
 }
