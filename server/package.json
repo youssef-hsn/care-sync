@@ -9,6 +9,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
     "bcrypt": "^5.1.1",
+    "caresync": "workspace:shared",
     "cookie-parser": "^1.4.7",
     "drizzle-orm": "^0.41.0",
     "express": "^4.21.2",
