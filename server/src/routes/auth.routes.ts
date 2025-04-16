@@ -1,12 +1,14 @@
-import express, { Router } from 'express';
-import { Request, Response } from 'express';
+import { Router } from 'express';
+import { getMe, login, logout, refreshToken } from '@/controllers/auth/identity.controller';
+import { register } from '@/controllers/auth/register.controller';
+import { requireAuth } from '@/middleware/auth';
 
-const router: Router = express.Router();
+const router: Router = Router();
 
-router.post('/register', async (req: Request, res: Response) => {});
-router.post('/login', async (req: Request, res: Response) => {});
-router.get('/logout', async (req: Request, res: Response) => {});
-router.get('/me', async (req: Request, res: Response) => {});
-router.post('/refresh-token', async (req: Request, res: Response) => {});
+router.post('/register', register);
+router.post('/login', login);
+router.post('/logout', requireAuth, logout);
+router.get('/me', requireAuth, getMe);
+router.post('/refresh', refreshToken);
 
 export default router;
