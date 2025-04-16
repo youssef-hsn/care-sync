@@ -3,27 +3,10 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Button } from "@/components/atoms/button";
 import { Form, FormField } from "@/components/atoms/form";
 import { FormInput, FormPassword } from "@/components/molecules/form-fields";
-
-const formSchema = z
-  .object({
-    fullName: z.string().min(2, { message: "Full Name is required" }),
-    phone: z.number(),
-    password: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters" })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, { message: "Password must contain at least one lowercase letter, one uppercase letter, and one number" }),
-    confirmPassword: z.string().min(6, { message: "Confirm your password" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
-
-type RegisterFormValues = z.infer<typeof formSchema>;
+import { registerFormSchema, type RegisterFormValues } from "caresync/validations/auth.schema";
 
 export function RegisterForm({
   className,
@@ -31,7 +14,7 @@ export function RegisterForm({
 }: React.ComponentProps<"div">) {
   const { t } = useTranslation("auth");
   const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       fullName: "",
       phone: undefined,
