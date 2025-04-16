@@ -1,4 +1,5 @@
 import 'module-alias/register';
+import 'dotenv/config';
 import express, { Application } from 'express';
 import apiRoutes from '@/routes/api.routes';
 
