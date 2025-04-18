@@ -7,18 +7,21 @@ import FormWithHero from "@/components/templates/form-with-hero"
 import { useMutation } from "@tanstack/react-query"
 import { authService } from "@/services/auth.service"
 import { useAuth } from "@/lib/hooks/use-auth"
+import { useNavigate } from "react-router-dom"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const {t} = useTranslation("auth")
+  const navigate = useNavigate()
   const { storeIdentity } = useAuth()
 
   const loginMutation = useMutation({
     mutationFn: authService.login,
     onSuccess: async (data) => {
       await storeIdentity(data)
+      navigate("/dashboard")
     },
     onError: (error) => {
       console.error("Login failed", error)
