@@ -66,7 +66,7 @@ export const allergySeverity = pgEnum("allergySeverity", [
 export const hasAllergy = pgTable("has_allergy", {
     appointmentID: integer("appointment_id").references(() => appointments.appointmentID),
     clientID: integer("client_id").references(() => clients.clientID),
-    allergyID: integer("allergy_id").notNull().references(() => allergies.name),
+    allergy: varchar("allergy", { length: 255 }).notNull().references(() => allergies.name),
     reaction: text("reaction"),
     severity: allergySeverity(),
     note: text("note"),

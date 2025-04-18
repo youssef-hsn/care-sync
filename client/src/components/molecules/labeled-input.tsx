@@ -38,7 +38,7 @@ export const LabeledPasswordInput: React.FC<PasswordInputProps> = ({
     return (
         <div className="grid gap-3">
             <Label htmlFor={"password"}>{label}</Label>
-            <PasswordInput id={"password"} {...inputProps}/>
+            <PasswordInput id={"password"} name="password" {...inputProps}/>
             {children?? null}
         </div>
     );

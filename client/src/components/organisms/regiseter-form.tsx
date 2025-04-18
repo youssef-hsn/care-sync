@@ -3,45 +3,61 @@ import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Button } from "@/components/atoms/button";
 import { Form, FormField } from "@/components/atoms/form";
 import { FormInput, FormPassword } from "@/components/molecules/form-fields";
-
-const formSchema = z
-  .object({
-    fullName: z.string().min(2, { message: "Full Name is required" }),
-    phone: z.number(),
-    password: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters" })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, { message: "Password must contain at least one lowercase letter, one uppercase letter, and one number" }),
-    confirmPassword: z.string().min(6, { message: "Confirm your password" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
-
-type RegisterFormValues = z.infer<typeof formSchema>;
+import { registerFormSchema, type RegisterFormValues } from "caresync/validations/auth.schema";
+import { useMutation } from "@tanstack/react-query";
+import { authService } from "@/services/auth.service";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { useNavigate } from "react-router-dom";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { t } = useTranslation("auth");
+  const { storeIdentity } = useAuth();
+  const navigate = useNavigate();
+  
   const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       fullName: "",
-      phone: undefined,
+      phone: "",
       password: "",
       confirmPassword: "",
     },
   });
 
+  const registerMutation = useMutation({
+    mutationFn: authService.register,
+    onSuccess: async (data) => {
+      console.log("Registration successful:", data);
+      try {
+        const loginData = await authService.login({
+          phone: form.getValues("phone"),
+          password: form.getValues("password"),
+        });
+        await storeIdentity(loginData);
+        navigate("/dashboard");
+      } catch (error) {
+        console.error("Auto-login after registration failed:", error);
+        navigate("/signin");
+      }
+    },
+    onError: (error) => {
+      console.error("Registration failed:", error);
+    },
+  });
+
   const onSubmit = (data: RegisterFormValues) => {
-    console.log("Registering user with data:", data);
+    const { confirmPassword, ...registerData } = data;
+    registerMutation.mutate({
+      fullName: registerData.fullName,
+      phone: registerData.phone,
+      password: registerData.password,
+    });
   };
 
   return (
@@ -61,6 +77,7 @@ export function RegisterForm({
                 <FormInput
                   label={t("register.name", "Full Name")}
                   placeholder={t("register.name_hint")}
+                  disabled={registerMutation.isPending}
                   {...field}
                 />
             )}
@@ -73,6 +90,7 @@ export function RegisterForm({
                 label={t("register.phone", "Phone")}
                 type="phone"
                 placeholder={t("register.phone_hint", "Enter your phone number")}
+                disabled={registerMutation.isPending}
                 {...field}
               />
             )}
@@ -85,6 +103,7 @@ export function RegisterForm({
                 label={t("password", "Password")}
                 strengthLabels={t("register.password_strength_labels", {returnObjects: true}) as string[]}
                 placeholder={t("register.password_hint", "Enter your password")}
+                disabled={registerMutation.isPending}
                 {...field}
               />
             )}
@@ -97,13 +116,20 @@ export function RegisterForm({
                 label={t("register.confirm_password", "Confirm Password")}
                 type="password"
                 placeholder={t("register.confirm_password_hint", "Confirm your password")}
+                disabled={registerMutation.isPending}
                 {...field}
               />
             )}
           />
 
-          <Button type="submit" className="w-full">
-            {t("register.action", "Register")}
+          <Button 
+            type="submit" 
+            className="w-full"
+            disabled={registerMutation.isPending}
+          >
+            {registerMutation.isPending 
+              ? t("register.submitting", "Registering...") 
+              : t("register.action", "Register")}
           </Button>
 
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t"/>
