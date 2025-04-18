@@ -5,11 +5,6 @@ import { UserModel } from '@/models/user';
 import { AuthenticatedRequest } from '@/middleware/auth';
 
 export const login: RequestHandler = async (req: Request, res: Response) => {
-  if (req.cookies?.refreshToken) {
-    res.status(400).json({ error: 'Already logged in', hint: 'Use refresh token to get new access token' });
-    return;
-  }
-
   const { phone, password } = req.body;
 
   if (!phone || !password) {
