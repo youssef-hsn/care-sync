@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/shadcn"
 import { Button } from "@/components/atoms/button"
 import { useTranslation } from "react-i18next"
 import heroImage from "@/assets/secure-healthcare.png"
