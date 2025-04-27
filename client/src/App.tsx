@@ -5,6 +5,8 @@ import i18n from '@/i18n';
 import SignInPage from '@/pages/auth/signin';
 import LoadingPage from '@/pages/state/loading';
 import SignUpPage from '@/pages/auth/signup';
+import { pages } from '@/lib/constants/app-pages';
+import PageWithSidebar from '@/components/templates/page-with-sidebar';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,7 +18,6 @@ const queryClient = new QueryClient({
 });
 
 const App: React.FC = () => {
-  console.log("app is being rendered");
   useEffect(() => {
     const handleLanguageChange = (lng: string) => {
       document.documentElement.lang = lng;
@@ -33,10 +34,15 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Suspense fallback={<LoadingPage/>}>
-          <Routes>
+          <Routes >
             <Route path='/' element={<Navigate to="signin" />} />
             <Route path='/signin' element={<SignInPage />} />
             <Route path='/signup' element={<SignUpPage />} />
+            <Route element={<PageWithSidebar />}>
+              {pages.map(({url, page: Page}) => 
+                <Route key={url} path={url} element={<Page />}/>
+              )}
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
