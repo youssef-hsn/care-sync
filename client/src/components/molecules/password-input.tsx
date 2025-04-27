@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Input } from "@/components/atoms/input"; 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/shadcn";
 import { Eye, EyeOff } from "lucide-react";
-import { Button } from "../atoms/button";
+import { Button } from "@/components/atoms/button";
 
 const PasswordInput: React.FC<React.ComponentPropsWithoutRef<"input">> = ({
   className,
