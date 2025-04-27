@@ -9,7 +9,7 @@ export const useAuth = () => {
 
   const storeIdentity = async (res: LoginResponse) => {
     const { accessToken: aT, user: {fullName, roles} } = res
-    console.log(aT)
+
     setAccessToken(aT)
     setIdentity(fullName, roles)
   }

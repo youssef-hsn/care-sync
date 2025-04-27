@@ -9,7 +9,7 @@ export interface LoginResponse {
   accessToken: string;
   user: {
     fullName: string;
-    roles: Set<string>;
+    roles: string[];
   };
 }
 

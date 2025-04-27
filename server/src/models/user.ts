@@ -52,12 +52,12 @@ export class UserModel {
         return user || null;
     }
 
-    static async getUserRoles(userID: number): Promise<Set<string>> {
+    static async getUserRoles(userID: number): Promise<string[]> {
         const roles = await db.select({ role: userRoles.role })
             .from(userRoles)
             .where(eq(userRoles.userID, userID));
         
-        return new Set(roles.map(r => r.role));
+        return roles.map(r => r.role);
     }
 
     static async verifyPassword(user: User, password: string): Promise<boolean> {
