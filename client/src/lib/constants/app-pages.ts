@@ -1,3 +1,4 @@
+import DashboardPage from "@/pages/app/dashboard";
 import WorkInProgress from "@/pages/state/work-in-progress";
 import { Home, Calendar, HandCoins, ScrollText, User, GitCompareIcon } from "lucide-react"
 
@@ -14,7 +15,7 @@ export const pages: Page[] = [
       title: "dashboard",
       url: "/dashboard",
       icon: Home,
-      page: WorkInProgress,
+      page: DashboardPage,
     },
     {
       title: "schedule",
