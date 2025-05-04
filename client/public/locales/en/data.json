@@ -1,0 +1,8 @@
+{
+    "billID": "Bill ID",
+    "clientId": "Client ID",
+    "total": "Total",
+    "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At"
+}

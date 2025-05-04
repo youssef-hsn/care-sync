@@ -1,0 +1,20 @@
+{
+    "bills": {
+        "title": "Bills",
+        "tableCaption": "List of all bills",
+        "billID": "Bill ID",
+        "clientId": "Client ID",
+        "total": "Total Amount",
+        "status": "Status",
+        "createdAt": "Created At"
+    },
+    "paymentStates": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "canceled": "Canceled"
+    },
+    "clientBills": {
+        "title": "Client Bills",
+        "tableCaption": "List of all client bills"
+    }
+}
