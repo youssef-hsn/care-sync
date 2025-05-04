@@ -10,9 +10,7 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const accessToken = useAuthStore.getState().accessToken;
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  }
+  config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 });
 
@@ -28,7 +26,7 @@ api.interceptors.response.use(
         const { data } = await axios.post(
           '/auth/refresh',
           {},
-          { baseURL: api.defaults.baseURL }
+          { baseURL: api.defaults.baseURL, withCredentials: true }
         );
 
         useAuthStore.getState().setAccessToken(data.accessToken);
