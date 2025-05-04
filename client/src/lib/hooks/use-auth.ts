@@ -24,7 +24,6 @@ export const useAuth = () => {
       const { accessToken } = await authService.refreshToken()
       setAccessToken(accessToken)
     } catch (error) {
-      console.error('Error refreshing access token:', error)
       clearSession()
     }
   }
