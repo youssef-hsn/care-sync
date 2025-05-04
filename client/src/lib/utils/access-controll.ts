@@ -1,6 +1,6 @@
 import { useAuth } from "@/lib/hooks/use-auth";
 
-export const userHasAnyOf = (roles?: Set<string>): boolean => {
+export const userHasAnyOf = (roles?: string[]): boolean => {
   const { roles: userRoles } = useAuth();
 
   if (!roles) {
@@ -9,7 +9,7 @@ export const userHasAnyOf = (roles?: Set<string>): boolean => {
 
   for (const role of userRoles)
     if (role === "admin") return true
-    else if (roles.has(role)) return true;
+    else if (roles.includes(role)) return true;
   
   return false;
 }
