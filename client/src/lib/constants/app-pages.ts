@@ -1,7 +1,7 @@
 import DashboardPage from "@/pages/app/dashboard";
 import WorkInProgress from "@/pages/state/work-in-progress";
 import BillsPage from "@/pages/app/client/bills";
-import AccountsPage from "@/pages/app/finance/accounts";
+import ClientBillsPage from "@/pages/app/finance/accounts";
 import { Home, Calendar, HandCoins, ScrollText, User, GitCompareIcon } from "lucide-react"
 
 export type Page = {
@@ -35,14 +35,14 @@ export const pages: Page[] = [
       title: "clients",
       url: "/clients",
       icon: User,
-      page: WorkInProgress,
+      page: ClientsPage,
       requiredRoles: ["associate"],
     },
     {
-      title: "accounts",
-      url: "/accounts",
+      title: "clientBills",
+      url: "/clients/bills",
       icon: HandCoins,
-      page: AccountsPage,
+      page: ClientBillsPage,
       requiredRoles: ["associate"],
     },
     {
