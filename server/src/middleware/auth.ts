@@ -31,3 +31,13 @@ export const requireAuth: RequestHandler = (
         return;
   }
 };
+
+export const requireRole = (role: string): RequestHandler => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user || !hasRoleOrAdmin(req.user, role)) {
+      res.status(403).json({ message: `This action requires ${role} role`});
+      return
+    }
+    next();
+  };
+}
