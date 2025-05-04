@@ -24,8 +24,8 @@ export function AppSidebar() {
 
   return ((
     <Sidebar side={i18n.dir()==="rtl"?"right": "left"}>
-      <SidebarHeader>
-        CareSync [{i18n.language}]
+      <SidebarHeader className="flex flex-row items-center">
+        <img src="/assets/caresync-logo.jpg" alt="CareSync" className="w-10 h-10 rounded-full"/> CareSync [{i18n.language}]
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
