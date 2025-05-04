@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { verifyAccessToken, TokenPayload } from '../utils/auth';
+import { verifyAccessToken, TokenPayload, hasRoleOrAdmin } from '../utils/auth';
 
 export interface AuthenticatedRequest extends Request {
   user?: TokenPayload;

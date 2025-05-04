@@ -21,7 +21,7 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
 
   const roles = await UserModel.getUserRoles(user.userID);
 
-  const payload: TokenPayload = { userId: user?.userID, roles: new Set(roles) };
+  const payload: TokenPayload = { userId: user?.userID, roles };
   const { accessToken, refreshToken } = AuthModel.generateTokenPair(payload);
 
   res.cookie('refreshToken', refreshToken, {
