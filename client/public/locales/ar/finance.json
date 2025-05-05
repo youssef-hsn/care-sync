@@ -1,0 +1,20 @@
+{
+    "bills": {
+        "title": "الفواتير",
+        "tableCaption": "قائمة بجميع الفواتير",
+        "billID": "رقم الفاتورة",
+        "clientId": "رقم العميل",
+        "total": "المبلغ الإجمالي",
+        "status": "الحالة",
+        "createdAt": "تاريخ الإنشاء"
+    },
+    "paymentStates": {
+        "paid": "مدفوع",
+        "pending": "معلق",
+        "canceled": "ملغى"
+    },
+    "clientBills": {
+        "title": "الفواتير العملاء",
+        "tableCaption": "قائمة بجميع الفواتير الخاصة بالعملاء"
+    }
+}

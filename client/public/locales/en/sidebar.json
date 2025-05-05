@@ -4,7 +4,7 @@
     "schedule": "schedule",
     "bills": "Bills",
     "clients": "Clients",
-    "accounts": "Accounts",
+    "clientBills": "Client Bills",
     "machines": "Machines",
     "logout": "Logout"
 }

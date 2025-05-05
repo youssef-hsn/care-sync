@@ -9,6 +9,7 @@ export const clients = pgTable("clients", {
     clientID: integer("client_id").primaryKey().references(() => users.userID),
     firstName: text("first_name").notNull(),
     lastName: text("last_name").notNull(),
+    phone: text("phone").notNull(),
     birthDate: date("birth_date"),
     bloodType: bloodTypes(),
     responsible: integer("responsible").references((): AnyPgColumn => clients.clientID),

@@ -33,7 +33,6 @@ export function RegisterForm({
   const registerMutation = useMutation({
     mutationFn: authService.register,
     onSuccess: async (data) => {
-      console.log("Registration successful:", data);
       try {
         const loginData = await authService.login({
           phone: form.getValues("phone"),
@@ -42,13 +41,10 @@ export function RegisterForm({
         await storeIdentity(loginData);
         navigate("/dashboard");
       } catch (error) {
-        console.error("Auto-login after registration failed:", error);
         navigate("/signin");
       }
     },
-    onError: (error) => {
-      console.error("Registration failed:", error);
-    },
+    onError: (error) => {},
   });
 
   const onSubmit = (data: RegisterFormValues) => {

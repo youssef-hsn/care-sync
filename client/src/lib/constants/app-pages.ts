@@ -1,4 +1,7 @@
+import DashboardPage from "@/pages/app/dashboard";
 import WorkInProgress from "@/pages/state/work-in-progress";
+import BillsPage from "@/pages/app/client/bills";
+import ClientBillsPage from "@/pages/app/finance/accounts";
 import { Home, Calendar, HandCoins, ScrollText, User, GitCompareIcon } from "lucide-react"
 
 export type Page = {
@@ -6,7 +9,7 @@ export type Page = {
   url: string;
   icon: any;
   page: React.FC;
-  requiredRoles?: Set<string>;
+  requiredRoles?: string[];
 }
 
 export const pages: Page[] = [
@@ -14,7 +17,7 @@ export const pages: Page[] = [
       title: "dashboard",
       url: "/dashboard",
       icon: Home,
-      page: WorkInProgress,
+      page: DashboardPage,
     },
     {
       title: "schedule",
@@ -26,27 +29,27 @@ export const pages: Page[] = [
       title: "bills",
       url: "/bills",
       icon: ScrollText,
-      page: WorkInProgress,
+      page: BillsPage,
     },
     {
       title: "clients",
       url: "/clients",
       icon: User,
-      page: WorkInProgress,
-      requiredRoles: new Set(["associate"]),
+      page: ClientsPage,
+      requiredRoles: ["associate"],
     },
     {
-      title: "accounts",
-      url: "/accounts",
+      title: "clientBills",
+      url: "/clients/bills",
       icon: HandCoins,
-      page: WorkInProgress,
-      requiredRoles: new Set(["associate"]),
+      page: ClientBillsPage,
+      requiredRoles: ["associate"],
     },
     {
       title: "machines",
       url: "/machines",
       icon: GitCompareIcon,
       page: WorkInProgress,
-      requiredRoles: new Set(["associate"]),
+      requiredRoles: ["associate"],
     }
 ]
