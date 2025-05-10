@@ -22,13 +22,13 @@ export default function ClientsPage() {
     return <div>Error: {error.message}</div>;
   }
 
-  if (data.length === 0) {
+  if (!data) {
     return <CenterDisplay>No clients found</CenterDisplay>
   } 
   
   return (
     <div className="m-1 flex flex-wrap gap-5 justify-start">
-      {[...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data]?.map((client: Client) => (
+      {data.map((client: Client) => (
         <ClientCard key={client.clientID} client={client} />
       ))}
     </div>
