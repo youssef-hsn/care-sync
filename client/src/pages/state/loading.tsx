@@ -4,7 +4,7 @@ const LoadingPage: React.FC = () => {
     const { t } = useTranslation("common");
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen bg-slate-50">
+        <div className="flex flex-col justify-center items-center h-screen">
             <div
                 className="w-20 h-20 border-4 border-slate-200 border-t-slate-600 rounded-full animate-spin"
             />
