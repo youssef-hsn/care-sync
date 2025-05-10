@@ -5,7 +5,7 @@ import i18n from '@/i18n';
 import SignInPage from '@/pages/auth/signin';
 import LoadingPage from '@/pages/state/loading';
 import SignUpPage from '@/pages/auth/signup';
-import { pages } from '@/lib/constants/app-pages';
+import { pages } from '@/lib/constants/pages/views';
 import PageWithSidebar from '@/components/templates/page-with-sidebar';
 
 const queryClient = new QueryClient({
