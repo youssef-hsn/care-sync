@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { CLIENTS_BASE_URI } from "@/lib/constants/pages/views"
 import { useTranslation } from "react-i18next"
 
-export const ClientCard = ({ client }: { client: Client }) => {
+export const ClientCard = ({ client, noActions }: { client: Client, noActions?: boolean }) => {
   const navigate = useNavigate()
   const { t } = useTranslation('data')
 
@@ -22,7 +22,7 @@ export const ClientCard = ({ client }: { client: Client }) => {
         <CardTitle className="text-center">{fullName(client)}</CardTitle>
         <CardDescription className="text-center">{client.phone}</CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-center">
+      {!noActions && <CardContent className="flex justify-center">
         <Button 
           variant="outline" 
           size="sm"
@@ -32,7 +32,7 @@ export const ClientCard = ({ client }: { client: Client }) => {
           <Eye className="h-4 w-4" />
           {t('viewDetails')}
         </Button>
-      </CardContent>
+      </CardContent>}
     </Card>
   )
 }
