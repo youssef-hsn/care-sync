@@ -4,17 +4,14 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/car
 import { useTranslation } from 'react-i18next';
 import { getMyBills } from '@/services/finance/bill.service';
 import { DataTable } from '@/components/molecules/data-table';
+import { useNavigate } from 'react-router-dom';
+import { BILLS_BASE_URI } from '@/lib/constants/pages/views';
+import { Bill } from 'caresync/types/bill';
 
-interface Bill {
-  billID: number;
-  clientId: number;
-  total: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
 const BillsPage: React.FC = () => {
   const { t } = useTranslation("finance");
+
+  const navigate = useNavigate();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['bills'],
@@ -37,6 +34,9 @@ const BillsPage: React.FC = () => {
           { label: 'status' },
         ]}
           isLoading={isLoading}
+          onRowClick={(row) => {
+            navigate(BILLS_BASE_URI + "/" + row.billID);
+          }}
         />
       </CardContent>
     </Card>
