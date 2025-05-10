@@ -4,5 +4,10 @@
     "total": "Total",
     "status": "Status",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "service": "Service",
+    "description": "Description",
+    "reason": "Reason",
+    "amount": "Amount",
+    "viewDetails": "View Details"
 }
