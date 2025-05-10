@@ -1,6 +1,8 @@
 {
     "bills": {
         "title": "Bills",
+        "createBill": "Create Bill",
+        "clientBills": "Client Bills",
         "tableCaption": "List of all bills",
         "billID": "Bill ID",
         "clientId": "Client ID",
@@ -13,8 +15,8 @@
         "pending": "Pending",
         "canceled": "Canceled"
     },
-    "clientBills": {
-        "title": "Client Bills",
-        "tableCaption": "List of all client bills"
+    "bill": {
+        "details": "Bill Details",
+        "total": "Total Amount"
     }
 }
