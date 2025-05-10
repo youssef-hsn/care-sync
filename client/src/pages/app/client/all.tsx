@@ -1,48 +1,36 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/card';
-import { useTranslation } from 'react-i18next';
-import { getClients } from '@/services/client.service';
-import { DataTable } from '@/components/molecules/data-table';
+import { useQuery } from "@tanstack/react-query";
+import { getClients } from "@/services/client.service";
+import { ClientCard } from "./components/client-card";
+import { Client } from "caresync/types/client";
+import CenterDisplay from "@/components/templates/center-display";
+import LoadingPage from "@/pages/state/loading";
 
-interface Bill {
-  billID: number;
-  clientId: number;
-  total: string;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
-const ClientsPage: React.FC = () => {
-  const { t } = useTranslation("finance");
-
-  const { data, isLoading } = useQuery({
+export default function ClientsPage() {
+  const { data, isLoading, error } = useQuery({
     queryKey: ['clients'],
     queryFn: async () => {
       return await getClients({ page: 0, size: 10 })},
     refetchOnWindowFocus: true,
   });
 
+
+  if (isLoading) {
+    return <LoadingPage />
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (data.length === 0) {
+    return <CenterDisplay>No clients found</CenterDisplay>
+  } 
+  
   return (
-    <Card className='m-1'>
-      <CardHeader>
-        <CardTitle>{t('bills.title')}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <DataTable<Bill> data={data} columns={[
-          { label: 'clientID' },
-          { label: 'name' },
-          { label: 'phone' },
-          { label: 'email' },
-          { label: 'address' },
-          { label: 'createdAt' },
-          { label: 'updatedAt' },
-        ]}
-          isLoading={isLoading}
-        >
-        </DataTable>
-      </CardContent>
-    </Card>
-  );
+    <div className="m-1 flex flex-wrap gap-5 justify-start">
+      {[...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data]?.map((client: Client) => (
+        <ClientCard key={client.clientID} client={client} />
+      ))}
+    </div>
+  )
 }
-export default ClientsPage;
