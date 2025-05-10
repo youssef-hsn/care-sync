@@ -1,4 +1,4 @@
-import { pages } from "@/lib/constants/app-pages"
+import { pages } from "@/lib/constants/pages/views"
 import { useLocation, Link } from "react-router-dom"
 import {
   Sidebar,
@@ -14,18 +14,24 @@ import {
 } from "@/components/atoms/sidebar"
 import { useTranslation } from "react-i18next"
 import { userHasAnyOf } from "@/lib/utils/access-controll"
-import { LogOut } from "lucide-react"
-import { useAuth } from "@/lib/hooks/use-auth"
+import { NavUser } from "../molecules/user/nav-user"
+import { ThemeSwitcher } from "../molecules/switchers/theme-switch"
+import { LanguageSwitcher } from "../molecules/switchers/language-switch"
 
 export function AppSidebar() {
   const { pathname } = useLocation()
   const { t, i18n } = useTranslation("sidebar")
-  const { clearSession } = useAuth()
 
   return ((
     <Sidebar side={i18n.dir()==="rtl"?"right": "left"}>
-      <SidebarHeader className="flex flex-row items-center">
-        <img src="/assets/caresync-logo.jpg" alt="CareSync" className="w-10 h-10 rounded-full"/> CareSync [{i18n.language}]
+      <SidebarHeader className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center gap-2">
+          <img src="/assets/caresync-logo.jpg" alt="CareSync" className="w-10 h-10 rounded-full"/> CareSync 
+        </div>
+        <div className="flex flex-row items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -35,7 +41,7 @@ export function AppSidebar() {
               {pages.map((page) =>
                 userHasAnyOf(page.requiredRoles) &&
                 <SidebarMenuItem key={page.title}>
-                  <SidebarMenuButton asChild className={pathname==page.url?"bg-accent": ""}>
+                  <SidebarMenuButton asChild className={pathname.startsWith(page.url)?"bg-accent": ""}>
                     <Link to={page.url}>
                       <page.icon />{t(page.title)}
                     </Link>
@@ -47,11 +53,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton asChild onClick={() => clearSession()} className="hover:text-red-600">
-          <Link to="/">
-            <LogOut />{t("logout")}
-          </Link>
-        </SidebarMenuButton>
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   ))
