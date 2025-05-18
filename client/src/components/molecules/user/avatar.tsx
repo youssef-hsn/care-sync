@@ -27,7 +27,9 @@ export const UserAvatar: React.FC<avatarProps> = ({name, dicebearURL, size}) => 
         <Avatar className={`${size ? `w-${size} h-${size}` : ""}`}>
           <AvatarImage src={DICEBEAR_BASE_URL + dicebearURL} />
           <AvatarFallback className="bg-accent">
-            <span className={`text-[${size ? size: 16}px] font-medium`}>{initials(name)}</span>
+            <span className={`text-[${size ? size: 16}px] font-medium select-none`}>
+              {initials(name)}
+            </span>
           </AvatarFallback>
         </Avatar>
     )
