@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { InferInsertModel, InferSelectModel, eq, like } from "drizzle-orm";
-import { bills, clients } from "@/db/schema";
+import { appointments, bills, clients, medications, prescriptions } from "@/db/schema";
 import { PaginationParams } from "caresync/types/pagination";
 import { defaultPaginationParams, validatePage } from "@/utils/pagination";
 import { Bill } from "./finance/bill";
@@ -55,5 +55,20 @@ export default class ClientModel {
             .limit(page.size)
             .offset(page.page * page.size)
         return clientBills;
+    }
+
+    static async getPrescriptions(clientID: number, page: PaginationParams = defaultPaginationParams): Promise<any[]> {
+        validatePage(page)
+
+        const clientPrescriptions = await db.select()
+            .from(prescriptions)
+            .innerJoin(appointments, eq(prescriptions.appointmentID, appointments.appointmentID))
+            .innerJoin(medications, eq(prescriptions.medicationID, medications.medicationID))
+            .where(eq(appointments.clientID, clientID))
+            .orderBy(prescriptions.createdAt)
+            .limit(page.size)
+            .offset(page.page * page.size)
+
+        return clientPrescriptions;
     }
 }
