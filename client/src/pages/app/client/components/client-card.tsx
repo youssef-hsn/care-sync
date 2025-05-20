@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/atoms/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/atoms/card"
 import { UserAvatar } from "@/components/molecules/user/avatar"
 import { Client, fullName } from "caresync/types/client"
 import { Button } from "@/components/atoms/button"
@@ -22,7 +22,17 @@ export const ClientCard = ({ client, noActions }: { client: Client, noActions?: 
         <CardTitle className="text-center">{fullName(client)}</CardTitle>
         <CardDescription className="text-center">{client.phone}</CardDescription>
       </CardHeader>
-      {!noActions && <CardContent className="flex justify-center">
+      <CardContent className="flex">
+        <div className="flex-1">
+          <p className="text-sm text-muted-foreground">
+            {t('bloodType')} {client.bloodType}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {t('birthDate')} {client.birthDate}
+          </p>
+        </div>
+      </CardContent>
+      {!noActions &&  <CardFooter className="flex justify-end">
         <Button 
           variant="outline" 
           size="sm"
@@ -32,7 +42,7 @@ export const ClientCard = ({ client, noActions }: { client: Client, noActions?: 
           <Eye className="h-4 w-4" />
           {t('viewDetails')}
         </Button>
-      </CardContent>}
+      </CardFooter>}
     </Card>
   )
 }
