@@ -9,5 +9,19 @@
     "description": "Description",
     "reason": "Reason",
     "amount": "Amount",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "bloodType": "Blood Type",
+    "birthDate": "Birth Date",
+    "paymentStates": {
+        "pending": "Pending",
+        "paid": "Paid",
+        "cancelled": "Cancelled",
+        "partial": "Partially Paid"
+    },
+    "appointmentStates": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+    }
 }

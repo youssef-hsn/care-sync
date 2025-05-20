@@ -8,7 +8,9 @@
         "clientId": "رقم العميل",
         "total": "المبلغ الإجمالي",
         "status": "الحالة",
-        "createdAt": "تاريخ الإنشاء"
+        "createdAt": "تاريخ الإنشاء",
+        "clientBillsDescription": "هنا يمكنك عرض جميع الفواتير المسجلة في النظام للعميل",
+        "searchBills": "ابحث عن فواتير..."
     },
     "paymentStates": {
         "paid": "مدفوع",
