@@ -9,5 +9,19 @@
     "description": "الوصف",
     "reason": "السبب",
     "amount": "المبلغ",
-    "viewDetails": "عرض التفاصيل"
+    "viewDetails": "عرض التفاصيل",
+    "bloodType": "فصيلة الدم",
+    "birthDate": "تاريخ الميلاد",
+    "paymentStates": {
+        "pending": "قيد الانتظار",
+        "paid": "مدفوع",
+        "cancelled": "ملغي",
+        "partial": "مدفوع جزئياً"
+    },
+    "appointmentStates": {
+        "pending": "قيد الانتظار",
+        "confirmed": "مؤكد",
+        "cancelled": "ملغي",
+        "completed": "مكتمل"
+    }
 }

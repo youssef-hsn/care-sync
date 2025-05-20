@@ -8,7 +8,9 @@
         "clientId": "Client ID",
         "total": "Total Amount",
         "status": "Status",
-        "createdAt": "Created At"
+        "createdAt": "Created At",
+        "clientBillsDescription": "Here you can see all the bills registered in the system for the client",
+        "searchBills": "Search bills..."
     },
     "paymentStates": {
         "paid": "Paid",
