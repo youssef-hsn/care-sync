@@ -26,3 +26,9 @@ export const getMyBills: RequestHandler = async (req: AuthenticatedRequest, res:
     const bills = await ClientModel.getBills(req.user!.userId, { page: Number(page), size: Number(size) });
     res.status(200).json(bills);
 }
+
+export const getPrescriptions: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
+    const { clientID } = req.params;
+    const prescriptions = await ClientModel.getPrescriptions(Number(clientID));
+    res.status(200).json(prescriptions);
+}
