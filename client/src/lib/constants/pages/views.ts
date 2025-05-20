@@ -2,8 +2,10 @@ import DashboardPage from "@/pages/app/dashboard";
 import WorkInProgress from "@/pages/state/work-in-progress";
 import BillsPage from "@/pages/app/client/bills";
 import ClientBillsPage from "@/pages/app/finance/client-bills";
-import { Home, Calendar, HandCoins, ScrollText, User, GitCompareIcon } from "lucide-react"
+import { Home, Calendar, HandCoins, ScrollText, User, GitCompareIcon, Heart } from "lucide-react"
 import ClientsPage from "@/pages/app/client/all";
+import MachinesPage from "@/pages/app/machine/all";
+import CharitiesPage from "@/pages/app/charity/all";
 
 export type Page = {
   title: string;
@@ -22,6 +24,8 @@ export const BILLS_BASE_URI = "/bills";
 export const CLIENTS_BASE_URI = "/clients";
 
 export const MACHINES_BASE_URI = "/machines";
+
+export const CHARITIES_BASE_URI = "/charities";
 
 export const pages: Page[] = [
     {
@@ -60,7 +64,13 @@ export const pages: Page[] = [
       title: "machines",
       url: MACHINES_BASE_URI,
       icon: GitCompareIcon,
-      page: WorkInProgress,
+      page: MachinesPage,
       requiredRoles: ["associate"],
+    },
+    {
+      title: "charities",
+      url: CHARITIES_BASE_URI,
+      icon: Heart,
+      page: CharitiesPage,
     }
 ]
