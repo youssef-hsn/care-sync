@@ -4,6 +4,7 @@ import { ClientCard } from "./components/client-card";
 import { Client } from "caresync/types/client";
 import CenterDisplay from "@/components/templates/center-display";
 import LoadingPage from "@/pages/state/loading";
+import { PageCard } from "@/components/organisms/page-card";
 
 export default function ClientsPage() {
   const { data, isLoading, error } = useQuery({
@@ -27,10 +28,22 @@ export default function ClientsPage() {
   } 
   
   return (
-    <div className="m-1 flex flex-wrap gap-5 justify-start">
-      {data.map((client: Client) => (
-        <ClientCard key={client.clientID} client={client} />
-      ))}
+
+    <div className="m-1 flex flex-col gap-5 justify-start">
+      <PageCard 
+        title="Clients" 
+        description="Here you can see all the clients registered in the system" 
+        buttonText="Register Client" 
+        buttonAction={() => {}} 
+        onSearchBarChange={() => {}}
+      />
+      
+      <div className="flex flex-wrap gap-5 justify-start">
+        {data.map((client: Client) => (
+          <ClientCard key={client.clientID} client={client} />
+        ))}
+      </div>
     </div>
+    
   )
 }
