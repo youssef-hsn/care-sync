@@ -7,9 +7,10 @@ export type BillDetail = {
 
 export type Bill = {
     billID: number;
-    clientID: number;
-    billDate: Date;
-    billAmount: number;
-    billStatus: string;
+    clientID?: number;
+    createdAt: Date;
+    updatedAt: Date;
+    total: number;
+    status: string;
     services?: BillDetail[];
 }
