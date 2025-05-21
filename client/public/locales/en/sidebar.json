@@ -1,0 +1,10 @@
+{
+    "nav": "Navigation",
+    "dashboard": "Dashboard",
+    "schedule": "schedule",
+    "bills": "Bills",
+    "clients": "Clients",
+    "clientBills": "Client Bills",
+    "machines": "Machines",
+    "logout": "Logout"
+}

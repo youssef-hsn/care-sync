@@ -1,0 +1,24 @@
+{
+    "bills": {
+        "title": "الفواتير",
+        "createBill": "إنشاء فاتورة",
+        "clientBills": "فواتير العملاء",
+        "tableCaption": "قائمة بجميع الفواتير",
+        "billID": "رقم الفاتورة",
+        "clientId": "رقم العميل",
+        "total": "المبلغ الإجمالي",
+        "status": "الحالة",
+        "createdAt": "تاريخ الإنشاء",
+        "clientBillsDescription": "هنا يمكنك عرض جميع الفواتير المسجلة في النظام للعميل",
+        "searchBills": "ابحث عن فواتير..."
+    },
+    "paymentStates": {
+        "paid": "مدفوع",
+        "pending": "معلق",
+        "canceled": "ملغى"
+    },
+    "bill": {
+        "details": "تفاصيل الفاتورة",
+        "total": "المبلغ الإجمالي"
+    }
+}

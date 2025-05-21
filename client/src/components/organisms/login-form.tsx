@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/shadcn"
 import { Button } from "@/components/atoms/button"
 import { useTranslation } from "react-i18next"
 import heroImage from "@/assets/secure-healthcare.png"
@@ -17,16 +17,21 @@ export function LoginForm({
   const navigate = useNavigate()
   const { storeIdentity } = useAuth()
 
+  const { i18n } = useTranslation()
   const loginMutation = useMutation({
     mutationFn: authService.login,
     onSuccess: async (data) => {
       await storeIdentity(data)
       navigate("/dashboard")
     },
-    onError: (error) => {
-      console.error("Login failed", error)
-    },
+    onError: (error) => {},
   })
+
+  const toggleLanguage = () => {
+    const currentLang = i18n.language
+    const newLang = currentLang === 'en' ? 'ar' : 'en'
+    i18n.changeLanguage(newLang)
+  }
 
   const login = (credentials: FormData) => {
     loginMutation.mutate({
@@ -37,6 +42,11 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
+      <div className="flex justify-end">
+        <button onClick={toggleLanguage} className="text-sm text-muted-foreground">
+          {i18n.language === 'en' ? 'عربي' : 'English'}
+        </button>
+      </div>
       <FormWithHero heroImage={heroImage} action={login}>
         <div className="flex flex-col items-center text-center">
           <h1 className="text-2xl font-bold">{t("login.greeting")}</h1>

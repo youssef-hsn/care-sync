@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { verifyAccessToken, TokenPayload } from '../utils/auth';
+import { verifyAccessToken, TokenPayload, hasRoleOrAdmin } from '../utils/auth';
 
 export interface AuthenticatedRequest extends Request {
   user?: TokenPayload;
@@ -31,3 +31,13 @@ export const requireAuth: RequestHandler = (
         return;
   }
 };
+
+export const requireRole = (role: string): RequestHandler => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user || !hasRoleOrAdmin(req.user, role)) {
+      res.status(403).json({ message: `This action requires ${role} role`});
+      return
+    }
+    next();
+  };
+}

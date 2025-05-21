@@ -9,8 +9,8 @@ export const paymentStates = pgEnum("payment_states", [
 
 export const bills = pgTable("bills", {
     billID: integer("bill_id").primaryKey().generatedByDefaultAsIdentity(),
+    clientId: integer("client_id").references(() => users.userID),
     total: numeric("total"),
-    date: timestamp("date"),
     status: paymentStates().notNull(),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
@@ -26,6 +26,7 @@ export const services = pgTable("services", {
 export const billReasons = pgTable("bill_reasons", {
     billID: integer("bill_id").references(() => bills.billID),
     serviceId: integer("service_id").notNull(),
+    reason: varchar("reason", { length: 255 }).notNull(),
 });
 
 

@@ -1,0 +1,27 @@
+{
+    "billID": "رقم الفاتورة",
+    "clientId": "رقم العميل",
+    "total": "المجموع",
+    "status": "الحالة",
+    "createdAt": "تاريخ الإنشاء",
+    "updatedAt": "تاريخ التحديث",
+    "service": "الخدمة",
+    "description": "الوصف",
+    "reason": "السبب",
+    "amount": "المبلغ",
+    "viewDetails": "عرض التفاصيل",
+    "bloodType": "فصيلة الدم",
+    "birthDate": "تاريخ الميلاد",
+    "paymentStates": {
+        "pending": "قيد الانتظار",
+        "paid": "مدفوع",
+        "cancelled": "ملغي",
+        "partial": "مدفوع جزئياً"
+    },
+    "appointmentStates": {
+        "pending": "قيد الانتظار",
+        "confirmed": "مؤكد",
+        "cancelled": "ملغي",
+        "completed": "مكتمل"
+    }
+}

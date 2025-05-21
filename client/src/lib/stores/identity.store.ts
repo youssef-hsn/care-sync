@@ -2,19 +2,21 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface IdentityState {
+  id: number
   fullName: string | null
-  roles: Set<string>
-  setIdentity: (firstName: string, roles: Set<string>) => void
+  roles: string[]
+  setIdentity: (id: number, fullName: string, roles: string[]) => void
   clearIdentity: () => void
 }
 
 export const useIdentityStore = create<IdentityState>()(
   persist(
     (set) => ({
+      id: 0,
       fullName: null,
-      roles: new Set<string>(),
-      setIdentity: (fullName, roles) => set({ fullName, roles }),
-      clearIdentity: () => set({ fullName: null, roles: new Set<string>() })
+      roles: [] as string[],
+      setIdentity: (id, fullName, roles) => set({ id, fullName, roles }),
+      clearIdentity: () => set({ fullName: null, roles: [] })
     }),
     {
       name: 'identity-storage',

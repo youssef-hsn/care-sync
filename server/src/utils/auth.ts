@@ -9,7 +9,7 @@ const REFRESH_TOKEN_EXPIRY = '24h';
 
 export interface TokenPayload {
   userId: number;
-  roles: Set<String>;
+  roles: string[];
 }
 
 export const hashPassword = async (password: string): Promise<string> => {
@@ -36,3 +36,16 @@ export const verifyAccessToken = (token: string): TokenPayload => {
 export const verifyRefreshToken = (token: string): TokenPayload => {
   return jwt.verify(token, REFRESH_TOKEN_SECRET) as TokenPayload;
 };
+
+export const hasRole = (user: TokenPayload, role: string): boolean => {
+  return user.roles.includes(role);
+}
+
+export const hasRoleOrAdmin = (user: TokenPayload, role: string): boolean => {
+  for (const r of user.roles) {
+    if (r === "admin" || r === role) {
+      return true
+    }
+  }
+  return false;
+}

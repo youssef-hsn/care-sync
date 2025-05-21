@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/shadcn";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,7 +33,6 @@ export function RegisterForm({
   const registerMutation = useMutation({
     mutationFn: authService.register,
     onSuccess: async (data) => {
-      console.log("Registration successful:", data);
       try {
         const loginData = await authService.login({
           phone: form.getValues("phone"),
@@ -42,13 +41,10 @@ export function RegisterForm({
         await storeIdentity(loginData);
         navigate("/dashboard");
       } catch (error) {
-        console.error("Auto-login after registration failed:", error);
         navigate("/signin");
       }
     },
-    onError: (error) => {
-      console.error("Registration failed:", error);
-    },
+    onError: (error) => {},
   });
 
   const onSubmit = (data: RegisterFormValues) => {
@@ -61,7 +57,7 @@ export function RegisterForm({
   };
 
   return (
-    <div className={cn("max-w-md mx-auto p-6 bg-white rounded-lg shadow-md", className)} {...props}>
+    <div className={cn("max-w-md mx-auto p-6 bg-background rounded-lg shadow-md", className)} {...props}>
       <Form {...form}>
         <div className="flex flex-col items-center text-center">
           <h1 className="text-2xl font-bold">{t("register.greeting")}</h1>

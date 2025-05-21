@@ -5,13 +5,13 @@ import { authService, LoginResponse } from '@/services/auth.service'
 
 export const useAuth = () => {
   const { accessToken, setAccessToken } = useAuthStore()
-  const { fullName, roles, setIdentity, clearIdentity } = useIdentityStore()
+  const { id, fullName, roles, setIdentity, clearIdentity } = useIdentityStore()
 
   const storeIdentity = async (res: LoginResponse) => {
-    const { accessToken: aT, user: {fullName, roles} } = res
-    console.log(aT)
+    const { accessToken: aT, user: {id, fullName, roles} } = res
+
     setAccessToken(aT)
-    setIdentity(fullName, roles)
+    setIdentity(id, fullName, roles)
   }
 
   const clearSession = () => {
@@ -24,7 +24,6 @@ export const useAuth = () => {
       const { accessToken } = await authService.refreshToken()
       setAccessToken(accessToken)
     } catch (error) {
-      console.error('Error refreshing access token:', error)
       clearSession()
     }
   }
