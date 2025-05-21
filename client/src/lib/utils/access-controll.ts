@@ -1,7 +1,7 @@
-import { useAuth } from "@/lib/hooks/use-auth";
+import { useIdentityStore } from "@/lib/stores/identity.store";
 
 export const userHasAnyOf = (roles?: string[]): boolean => {
-  const { roles: userRoles } = useAuth();
+  const userRoles = useIdentityStore.getState().roles;
 
   if (!roles) {
     return true;

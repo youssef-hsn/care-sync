@@ -21,6 +21,7 @@ export interface DataTableProps<Data extends Record<string, any>> {
     isLoading?: boolean
     onRowClick?: (item: Data) => void
     className?: string
+    children?: React.ReactNode
 }
 
 export function DataTable<Data extends Record<string, any>>({
@@ -30,6 +31,7 @@ export function DataTable<Data extends Record<string, any>>({
     isLoading,
     onRowClick,
     className,
+    children,
 }: DataTableProps<Data>) {
     const { t } = useTranslation("data")
 
@@ -82,6 +84,7 @@ export function DataTable<Data extends Record<string, any>>({
                     </TableRow>
                 }
             </TableBody>
+            {children}
         </Table>
     )
 }

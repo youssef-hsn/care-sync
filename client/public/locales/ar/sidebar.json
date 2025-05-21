@@ -6,5 +6,6 @@
     "clients": "العملاء",
     "accounts": "الحسابات",
     "machines": "الآلات",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "clientBills": "فواتير العملاء"
 }

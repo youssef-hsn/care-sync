@@ -1,7 +1,7 @@
 import { AuthenticatedRequest } from "@/middleware/auth";
 import { RequestHandler, Response } from "express";
 import BillModel from "@/models/finance/bill";
-import { hasRoleOrAdmin } from "@/utils/auth";
+import { hasRoleOrAdmin, TokenPayload } from "@/utils/auth";
 
 export const getBills: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
     const { page, size } = req.query;
@@ -17,7 +17,7 @@ export const getBill: RequestHandler = async (req: AuthenticatedRequest, res: Re
         return;
     }
 
-    if (bill.clientId !== req.user?.userId || hasRoleOrAdmin(req.user, "Associate")) {
+    if (bill.clientId !== req.user?.userId && !hasRoleOrAdmin(req.user as TokenPayload, "Associate")) {
         res.status(403).json({ message: "You are not authorized to view this bill" });
         return;
     }

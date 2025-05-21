@@ -8,6 +8,7 @@ interface LoginCredentials {
 export interface LoginResponse {
   accessToken: string;
   user: {
+    id: number;
     fullName: string;
     roles: string[];
   };

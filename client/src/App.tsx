@@ -5,8 +5,10 @@ import i18n from '@/i18n';
 import SignInPage from '@/pages/auth/signin';
 import LoadingPage from '@/pages/state/loading';
 import SignUpPage from '@/pages/auth/signup';
-import { pages } from '@/lib/constants/app-pages';
+import { pages } from '@/lib/constants/pages/views';
 import PageWithSidebar from '@/components/templates/page-with-sidebar';
+import { ThemeWrapper } from '@/components/templates/theme-wrapper';
+import { inspectionsPages } from './lib/constants/pages/inspections';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,20 +34,25 @@ const App: React.FC = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Suspense fallback={<LoadingPage/>}>
-          <Routes >
-            <Route path='/' element={<Navigate to="signin" />} />
-            <Route path='/signin' element={<SignInPage />} />
-            <Route path='/signup' element={<SignUpPage />} />
-            <Route element={<PageWithSidebar />}>
-              {pages.map(({url, page: Page}) => 
-                <Route key={url} path={url} element={<Page />}/>
-              )}
-            </Route>
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+        <BrowserRouter>
+            <Suspense fallback={<LoadingPage/>}>
+              <Routes>
+              <Route element={<ThemeWrapper/>}>
+                <Route path='/' element={<Navigate to="signin" />} />
+                <Route path='/signin' element={<SignInPage />} />
+                <Route path='/signup' element={<SignUpPage />} />
+                <Route element={<PageWithSidebar />}>
+                  {pages.map(({url, page: Page}) => 
+                    <Route key={url} path={url} element={<Page />}/>
+                  )}
+                  {inspectionsPages.map(({url, page: Page}) => 
+                    <Route key={url} path={url} element={<Page />}/>
+                  )}
+                </Route>
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
     </QueryClientProvider>
   );
 };
