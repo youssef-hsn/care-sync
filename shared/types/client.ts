@@ -8,6 +8,8 @@ export type Client = {
   email?: string;
   createdAt: Date;
   updatedAt: Date;
+  bloodType: string;
+  birthDate: string;
 }
 
 export const fullName = (client: Client) => {
