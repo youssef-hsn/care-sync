@@ -32,7 +32,7 @@ export const reportStates = pgEnum("report_states", [
 
 export const reports = pgTable("reports", {
     reportID: integer("report_id").primaryKey().generatedAlwaysAsIdentity(),
-    appointmentID: integer("appointment_id").notNull().references(() => appointments.appointmentID),
+    clientID: integer("client_id").notNull().references(() => clients.clientID),
     title: varchar("title", { length: 255 }).notNull(),
     fileURI: text("file_uri").notNull(),
     status: reportStates().notNull(),
@@ -42,7 +42,7 @@ export const reports = pgTable("reports", {
 
 export const records = pgTable("records", {
     recordID: integer("record_id").primaryKey().generatedAlwaysAsIdentity(),
-    appointmentID: integer("appointment_id").notNull().references(() => appointments.appointmentID),
+    clientID: integer("client_id").notNull().references(() => clients.clientID),
     title: varchar("title", { length: 255 }).notNull(),
     details: text("details"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -57,7 +57,7 @@ export const prescriptionStates = pgEnum("prescription_states", [
 ]);
 
 export const prescriptions = pgTable("prescriptions", {
-    appointmentID: integer("appointment_id").notNull().references(() => appointments.appointmentID),
+    clientID: integer("client_id").notNull().references(() => clients.clientID),
     medicationID: integer("medication_id").notNull().references(() => medications.medicationID),
     frequency: varchar("frequency", { length: 100 }).notNull(),
     instructions: varchar("instructions", { length: 255 }),
