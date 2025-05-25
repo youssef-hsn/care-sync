@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useThemeStore } from '@/lib/stores/theme.store';
+import { Toaster } from 'sonner';
 
 export function ThemeWrapper() {
   const { theme } = useThemeStore()
@@ -25,6 +26,7 @@ export function ThemeWrapper() {
 
   return (
     <>
+      <Toaster position="top-right" richColors />
       <Outlet />
     </>
   );
