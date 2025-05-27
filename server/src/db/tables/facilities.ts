@@ -21,10 +21,10 @@ export const machines = pgTable("machines", {
     model: text("model").notNull(),
     price: numeric("price", { precision: 10, scale: 2 }).notNull(),
     value: numeric("value", { precision: 10, scale: 2 }).notNull(),
-    manufacturer: text("manufacturer").notNull(),
-    provider: text("provider").notNull(),
-    clinicId: integer("clinic_id").notNull(),
-    status: machineStates().notNull().default("active"),
+    manufacturer: text("manufacturer"),
+    provider: text("provider"),
+    clinicId: integer("clinic_id"),
+    status: machineStates().default("active"),
 });
 
 export const operates = pgTable("operates", {

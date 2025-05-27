@@ -13,7 +13,7 @@ const FormWithHero: React.FC<FormWithHeroProps> = ({ heroImage, children, ...for
           <div className="bg-muted relative hidden md:block">
             <img
               src={heroImage}
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale bg-muted"
+              className="absolute inset-0 h-full w-full object-cover bg-muted"
             />
           </div>
             

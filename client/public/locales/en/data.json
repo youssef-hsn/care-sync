@@ -4,5 +4,24 @@
     "total": "Total",
     "status": "Status",
     "createdAt": "Created At",
-    "updatedAt": "Updated At"
+    "updatedAt": "Updated At",
+    "service": "Service",
+    "description": "Description",
+    "reason": "Reason",
+    "amount": "Amount",
+    "viewDetails": "View Details",
+    "bloodType": "Blood Type",
+    "birthDate": "Birth Date",
+    "paymentStates": {
+        "pending": "Pending",
+        "paid": "Paid",
+        "cancelled": "Cancelled",
+        "partial": "Partially Paid"
+    },
+    "appointmentStates": {
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+    }
 }

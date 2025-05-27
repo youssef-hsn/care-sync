@@ -10,13 +10,25 @@ export const getBills: RequestHandler = async (req: AuthenticatedRequest, res: R
 }
 
 export const getClients: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
-    const { page, size } = req.query;
-    const clients = await ClientModel.getAll({ page: Number(page), size: Number(size) });
+    const { page, size, search } = req.query;
+    const clients = await ClientModel.getAll({ page: Number(page), size: Number(size), search: search as string });
     res.status(200).json(clients);
+}
+
+export const getClient: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
+    const { clientID } = req.params;
+    const client = await ClientModel.findById(Number(clientID));
+    res.status(200).json(client);
 }
 
 export const getMyBills: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
     const { page, size } = req.query;
     const bills = await ClientModel.getBills(req.user!.userId, { page: Number(page), size: Number(size) });
     res.status(200).json(bills);
+}
+
+export const getPrescriptions: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
+    const { clientID } = req.params;
+    const prescriptions = await ClientModel.getPrescriptions(Number(clientID));
+    res.status(200).json(prescriptions);
 }

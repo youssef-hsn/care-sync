@@ -1,20 +1,32 @@
 {
     "bills": {
         "title": "Bills",
+        "createBill": "Create Bill",
+        "clientBills": "Client Bills",
         "tableCaption": "List of all bills",
         "billID": "Bill ID",
         "clientId": "Client ID",
         "total": "Total Amount",
         "status": "Status",
-        "createdAt": "Created At"
+        "createdAt": "Created At",
+        "clientBillsDescription": "Here you can see all the bills registered in the system for the client",
+        "searchBills": "Search bills..."
     },
     "paymentStates": {
         "paid": "Paid",
         "pending": "Pending",
         "canceled": "Canceled"
     },
-    "clientBills": {
-        "title": "Client Bills",
-        "tableCaption": "List of all client bills"
+    "bill": {
+        "details": "Bill Details",
+        "total": "Total Amount",
+        "client": "Client",
+        "services": "Services",
+        "createService": "Create Service",
+        "reason": "Reason",
+        "amount": "Amount",
+        "machines": "Machines Cuts",
+        "beneficiaries": "Beneficiaries",
+        "status": "Status"
     }
 }

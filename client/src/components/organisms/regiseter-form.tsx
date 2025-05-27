@@ -57,7 +57,7 @@ export function RegisterForm({
   };
 
   return (
-    <div className={cn("max-w-md mx-auto p-6 bg-white rounded-lg shadow-md", className)} {...props}>
+    <div className={cn("max-w-md mx-auto p-6 bg-background rounded-lg shadow-md", className)} {...props}>
       <Form {...form}>
         <div className="flex flex-col items-center text-center">
           <h1 className="text-2xl font-bold">{t("register.greeting")}</h1>

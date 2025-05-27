@@ -1,5 +1,5 @@
 import { pgTable, integer, text, numeric, timestamp, varchar, pgEnum } from "drizzle-orm/pg-core";
-import { users, associates } from "@/db/schema";
+import { users, associates, machines } from "@/db/schema";
 
 export const paymentStates = pgEnum("payment_states", [
     "pending",
@@ -17,9 +17,9 @@ export const bills = pgTable("bills", {
 });
 
 export const services = pgTable("services", {
-    serviceId: integer("service_id").primaryKey().generatedByDefaultAsIdentity(),
-    amount: numeric("amount"),
-    title: varchar("title", { length: 255 }).notNull(),
+    serviceID: integer("service_id").primaryKey().generatedByDefaultAsIdentity(),
+    price: numeric("price"),
+    name: varchar("name", { length: 255 }).notNull(),
     description: text("description"),
 });
 
@@ -27,6 +27,7 @@ export const billReasons = pgTable("bill_reasons", {
     billID: integer("bill_id").references(() => bills.billID),
     serviceId: integer("service_id").notNull(),
     reason: varchar("reason", { length: 255 }).notNull(),
+    amount: numeric("amount"),
 });
 
 
@@ -54,4 +55,11 @@ export const sharesBills = pgTable("shares_bills", {
     userID: integer("user_id").notNull().references(() => users.userID),
     amount: numeric("amount"),
     status: paymentStates().notNull(),
+});
+
+export const usedMachines = pgTable("used_machines", {
+    machineID: integer("machine_id").references(() => machines.machineId),
+    billID: integer("bill_id").references(() => bills.billID),
+    reason: varchar("reason", { length: 255 }),
+    amount: numeric("amount"),
 });

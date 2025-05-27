@@ -40,16 +40,16 @@ export default class BillModel {
     static async getBillDetails(billId: number): Promise<BillDetail[]> {
         const billDetails = await db.select()
             .from(billReasons)
-            .innerJoin(services, eq(billReasons.serviceId, services.serviceId))
+            .innerJoin(services, eq(billReasons.serviceId, services.serviceID))
             .where(eq(billReasons.billID, billId));
 
         return billDetails.map((
             {bill_reasons: bill, services: service}) => {
             return {
-                service: service.title,
+                service: service.name,
                 description: service.description,
                 reason: bill.reason,
-                amount: Number(service.amount),
+                amount: Number(service.price),
         } as BillDetail;
         });
     }
