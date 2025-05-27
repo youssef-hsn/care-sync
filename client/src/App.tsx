@@ -9,6 +9,7 @@ import { pages } from '@/lib/constants/pages/views';
 import PageWithSidebar from '@/components/templates/page-with-sidebar';
 import { ThemeWrapper } from '@/components/templates/theme-wrapper';
 import { inspectionsPages } from './lib/constants/pages/inspections';
+import { activitiesPages } from './lib/constants/pages/activities';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,7 +35,7 @@ const App: React.FC = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+          <BrowserRouter>
             <Suspense fallback={<LoadingPage/>}>
               <Routes>
               <Route element={<ThemeWrapper/>}>
@@ -46,6 +47,9 @@ const App: React.FC = () => {
                     <Route key={url} path={url} element={<Page />}/>
                   )}
                   {inspectionsPages.map(({url, page: Page}) => 
+                    <Route key={url} path={url} element={<Page />}/>
+                  )}
+                  {activitiesPages.map(({url, page: Page}) => 
                     <Route key={url} path={url} element={<Page />}/>
                   )}
                 </Route>
