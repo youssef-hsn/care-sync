@@ -19,6 +19,14 @@
     },
     "bill": {
         "details": "Bill Details",
-        "total": "Total Amount"
+        "total": "Total Amount",
+        "client": "Client",
+        "services": "Services",
+        "createService": "Create Service",
+        "reason": "Reason",
+        "amount": "Amount",
+        "machines": "Machines Cuts",
+        "beneficiaries": "Beneficiaries",
+        "status": "Status"
     }
 }
