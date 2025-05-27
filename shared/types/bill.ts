@@ -1,8 +1,14 @@
 export type BillStatus = "pending" | "paid" | "cancelled";
 
-export type BillDetail = {
-    service: string;
+export type Service = {
+    serviceID: number;
+    name: string;
     description: string;
+    price: number;
+}
+
+export type BillDetail = {
+    service: Service | null;
     reason: string;
     amount: number;
 }
