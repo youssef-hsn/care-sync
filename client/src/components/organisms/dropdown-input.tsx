@@ -18,7 +18,7 @@ interface DropdownInputProps<T> {
   onSelect: (item: T) => void;
   onClear?: () => void;
   ItemDisplay: (item: T) => React.ReactNode;
-  CreateNewForm: React.FC<{onComplete: () => void}>;
+  CreateNewForm?: React.FC<{onComplete: () => void}>;
   placeholder?: string;
   className?: string;
 }
@@ -146,26 +146,28 @@ export function DropdownInput<T>({
             </div>
           ) : null}
 
-          <div
+          {CreateNewForm && <div
             onClick={handleCreateNew}
             className="flex items-center px-4 py-2 border-t border-border hover:bg-accent hover:text-accent-foreground cursor-pointer"
           >
             <PlusIcon className="w-4 h-4 mr-2 text-primary" />
             <span>Create New</span>
-          </div>
+          </div>}
         </div>
       )}
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Create New</DialogTitle>
-          </DialogHeader>
-          <CreateNewForm onComplete={() => {
-            setIsDialogOpen(false);
-          }} />
-        </DialogContent>
-      </Dialog>
+      {CreateNewForm && (
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Create New</DialogTitle>
+            </DialogHeader>
+            <CreateNewForm onComplete={() => {
+              setIsDialogOpen(false);
+            }} />
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
