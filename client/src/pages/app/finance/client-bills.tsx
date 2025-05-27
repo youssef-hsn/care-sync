@@ -34,7 +34,9 @@ const ClientBillsPage: React.FC = () => {
                         onChange={() => {}}
                         className='w-full'
                     />
-                    <Button>
+                    <Button onClick={() => {
+                        navigate(BILLS_BASE_URI + "/new");
+                    }}>
                         <PlusIcon /> {t('bills.createBill')}
                     </Button>
                 </div>
