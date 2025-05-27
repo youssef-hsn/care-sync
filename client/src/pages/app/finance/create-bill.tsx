@@ -43,6 +43,12 @@ export default function CreateBillPage() {
             toast.success(t('bills.created'));
             navigate("/clients/bills", { replace: true });
         },
+        onError: (error: any) => {
+            const m = JSON.parse(error.response.data.message);
+            m.forEach((message: any) => {
+                toast.error(message.message);
+            }); 
+        },
     });
 
     return (
