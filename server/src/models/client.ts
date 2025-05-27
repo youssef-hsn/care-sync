@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { InferInsertModel, InferSelectModel, eq, like } from "drizzle-orm";
+import { InferInsertModel, InferSelectModel, eq, like, or } from "drizzle-orm";
 import { appointments, bills, clients, medications, prescriptions } from "@/db/schema";
 import { PaginationParams } from "caresync/types/pagination";
 import { defaultPaginationParams, validatePage } from "@/utils/pagination";
@@ -29,6 +29,14 @@ export default class ClientModel {
         validatePage(page)
         const selectedClients = await db.select()
             .from(clients)
+            .where(page.search 
+                ? or(
+                    like(clients.firstName, `%${page.search}%`),
+                    like(clients.lastName, `%${page.search}%`),
+                    like(clients.phone, `%${page.search}%`)
+                )
+                : undefined
+            )
             .limit(page.size)
             .offset(page.page * page.size)
         return selectedClients;
@@ -62,9 +70,9 @@ export default class ClientModel {
 
         const clientPrescriptions = await db.select()
             .from(prescriptions)
-            .innerJoin(appointments, eq(prescriptions.appointmentID, appointments.appointmentID))
+            .innerJoin(clients, eq(prescriptions.clientID, clients.clientID))
             .innerJoin(medications, eq(prescriptions.medicationID, medications.medicationID))
-            .where(eq(appointments.clientID, clientID))
+            .where(eq(clients.clientID, clientID))
             .orderBy(prescriptions.createdAt)
             .limit(page.size)
             .offset(page.page * page.size)
