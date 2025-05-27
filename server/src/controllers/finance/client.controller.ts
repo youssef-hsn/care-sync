@@ -10,8 +10,8 @@ export const getBills: RequestHandler = async (req: AuthenticatedRequest, res: R
 }
 
 export const getClients: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
-    const { page, size } = req.query;
-    const clients = await ClientModel.getAll({ page: Number(page), size: Number(size) });
+    const { page, size, search } = req.query;
+    const clients = await ClientModel.getAll({ page: Number(page), size: Number(size), search: search as string });
     res.status(200).json(clients);
 }
 
