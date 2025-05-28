@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { DropdownInput } from "@/components/organisms/dropdown-input";
 import { User } from "caresync/types/user";
 import { PersonCard } from "../../../pages/app/finance/components/cards/person-card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select";
 
 
 export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
@@ -22,19 +23,29 @@ export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
             lastName: "",
             phone: "",
             email: "",
+            bloodType: undefined,
         },
     });
 
-    const { mutate: createService } = useMutation({
+    const { mutate: createClient } = useMutation({
         mutationFn: (data: z.infer<typeof clientSchema>) => {
-            return api.post("/client", data);
+            return api.post("/client", { client: data });
+        },
+        onSuccess: () => {
+            toast.success("Client created successfully");
+            onComplete();
+        },
+        onError: (error) => {
+            const m = JSON.parse(error.response.data.message);
+            m.forEach((message: any) => {
+                toast.error(message.path[0] + " " + message.message);
+            });
         },
     });
 
 
     const onSubmit = (data: z.infer<typeof clientSchema>) => {
-        createService(data);
-        toast.success("Client created successfully");
+        createClient(data);
         onComplete();
     }
     return (
@@ -69,6 +80,34 @@ export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
                         </FormItem>
                     )}
                 />
+                <FormField
+                    control={form.control}
+                    name="bloodType"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Blood Type</FormLabel>
+                            <FormControl>
+                                <Select
+                                    name="bloodType"
+                                    onValueChange={(value) => {
+                                        field.onChange(value);
+                                    }}
+                                    value={field.value || ""}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select a blood type" className="w-fit" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((bloodType) => (
+                                            <SelectItem key={bloodType} value={bloodType}>{bloodType}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
                 <FormField
                     control={form.control}
@@ -93,7 +132,7 @@ export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
                             <FormControl>
                                 <Input {...field} onChange={(e) => {
                                     field.onChange(e.target.value);
-                                }} type="email" />
+                                }} type="email" required={false}/>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -106,7 +145,8 @@ export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Responsible</FormLabel>
-                            <FormControl>
+                            <FormControl
+                            >
                                 <DropdownInput<User>
                                     endpoint="/users"
                                     onSelect={(value: User) => {
