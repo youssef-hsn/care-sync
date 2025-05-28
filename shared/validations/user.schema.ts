@@ -9,4 +9,5 @@ export const userSchema = z.object({
 
 export const clientSchema = userSchema.extend({
     responsibleId: z.number().min(1, { message: "Responsible is required" }),
+    bloodType: z.enum(["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]).optional(),
 })
