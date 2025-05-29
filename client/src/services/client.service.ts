@@ -20,6 +20,6 @@ export const createGetter = (detail: string) => {
             `client/${clientID}/${detail}`, 
             { params: page },
         );
-        return response.data;
+        return response;
     }
 }
