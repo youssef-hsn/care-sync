@@ -5,7 +5,6 @@ import { Button } from "@/components/atoms/button";
 import { Trash2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/atoms/tooltip";
 import { User, Share } from "caresync/types/user";
-import { CreateMachineForm } from "../../../../components/common/forms/create-machine";
 import { CreateUserForm } from "../../../../components/common/forms/create-user";
 
 
@@ -87,7 +86,6 @@ export const BeneficiariesSection = ({onChange}: {onChange: ({meta, beneficiarie
                         CreateNewForm={CreateUserForm}
                     />
                     <Input
-                        value={beneficiary.amount}
                         onChange={(e) => {
                             const newBeneficiary = beneficiaries[index];
                             newBeneficiary.reason = e.target.value;
@@ -101,6 +99,13 @@ export const BeneficiariesSection = ({onChange}: {onChange: ({meta, beneficiarie
                         type="textarea"
                         className="w-1/2"
                     />
+                    {index !== (beneficiaries.length - 1) && <Button
+                        variant="outline"
+                        className="w-fit"
+                        onClick={() => handleDeleteBeneficiary(index)}
+                    >
+                        <Trash2 />
+                    </Button>}
                     <Input
                         disabled={!beneficiary.user}
                         onChange={(e) => {
@@ -116,13 +121,6 @@ export const BeneficiariesSection = ({onChange}: {onChange: ({meta, beneficiarie
                         type="number"
                         className="w-1/9"
                     />
-                    {index !== (beneficiaries.length - 1) && <Button
-                        variant="outline"
-                        className="w-fit"
-                        onClick={() => handleDeleteBeneficiary(index)}
-                    >
-                        <Trash2 />
-                    </Button>}
                 </div>)
             )}
             <div className="flex flex-row gap-2 items-center justify-end">

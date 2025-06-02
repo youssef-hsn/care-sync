@@ -101,6 +101,13 @@ export const MachinesSection = ({onChange}: {onChange: ({meta, machines}: {meta:
                         type="textarea"
                         className="w-1/2"
                     />
+                    {index !== (machines.length - 1) && <Button
+                        variant="outline"
+                        className="w-fit"
+                        onClick={() => handleDeleteMachine(index)}
+                    >
+                        <Unlink />
+                    </Button>}
                     <Input
                         disabled={!machine.machine}
                         onChange={(e) => {
@@ -116,13 +123,6 @@ export const MachinesSection = ({onChange}: {onChange: ({meta, machines}: {meta:
                         type="number"
                         className="w-1/9"
                     />
-                    {index !== (machines.length - 1) && <Button
-                        variant="outline"
-                        className="w-fit"
-                        onClick={() => handleDeleteMachine(index)}
-                    >
-                        <Unlink />
-                    </Button>}
                 </div>)
             )}
             <div className="flex flex-row gap-2 items-center justify-end">

@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/atoms/tool
 import { CreateServiceForm } from "../../../../components/common/forms/create-service";
 
 
-export const ServicesSection = ({onChange}: {onChange: ({meta, services}: {meta: {total: Number}, services: BillDetail[]}) => void}) => {
+export const ServicesSection = ({onChange, onServiceSelect}: {onServiceSelect: (value: Service) => void, onChange: ({meta, services}: {meta: {total: Number}, services: BillDetail[]}) => void}) => {
     const [services, setServices] = useState<BillDetail[]>([
         { service: null, reason: "", amount: 0 }
     ]);
@@ -23,6 +23,9 @@ export const ServicesSection = ({onChange}: {onChange: ({meta, services}: {meta:
                 return newServices;
             }
         )
+        if (service.service) {
+            onServiceSelect(service.service);
+        }
     }
 
     const addService = () => {
@@ -101,9 +104,6 @@ export const ServicesSection = ({onChange}: {onChange: ({meta, services}: {meta:
                         type="textarea"
                         className="w-1/2"
                     />
-                    <span className="w-1/8 text-right">
-                        ${services[index].service?.price ?? 0}
-                    </span>
                     {index !== (services.length - 1) && <Button
                         variant="outline"
                         className="w-fit"
@@ -111,6 +111,23 @@ export const ServicesSection = ({onChange}: {onChange: ({meta, services}: {meta:
                     >
                         <TrashIcon />
                     </Button>}
+                    <Input
+                        value={services[index].amount}
+                        onChange={(e) => {
+                            total.current = Number(total.current) - Number(services[index].amount) + Number(e.target.value);
+                            const newService = services[index];
+                            newService.amount = Number(e.target.value);
+
+                            setServices(services => {
+                                const newServices = [...services];
+                                newServices[index] = newService;
+                                return newServices;
+                            })
+                        }}
+                        placeholder="Amount"
+                        type="number"
+                        className="w-1/8"
+                    />
                 </div>)
             )}
             <div className="flex flex-row gap-2 items-center justify-end">
