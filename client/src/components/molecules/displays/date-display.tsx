@@ -1,4 +1,4 @@
-import { Badge } from "@/components/atoms/badge";
+ import { Badge } from "@/components/atoms/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/atoms/tooltip";
 import { format } from "date-fns";
 
