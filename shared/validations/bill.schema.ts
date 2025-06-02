@@ -26,4 +26,12 @@ export const createServiceSchema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     description: z.string().min(1, { message: "Description is required" }),
     price: z.number().min(1, { message: "Price is required" }),
-})
+    associateShare: z.number().min(0, { message: "Associate share is required" }).optional(),
+}).refine((data) => {
+    if (data.associateShare) {
+        return data.associateShare <= data.price;
+    }
+}, {
+    message: "Associate share must be less than or equal to price",
+    path: ["associateShare"],
+});
