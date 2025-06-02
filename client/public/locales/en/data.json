@@ -23,5 +23,17 @@
         "confirmed": "Confirmed",
         "cancelled": "Cancelled",
         "completed": "Completed"
+    },
+    "prescriptionStates": {
+        "inactive": "Inactive",
+        "active": "Active",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+    },
+    "illnessStates": {
+        "active": "Active",
+        "recovered": "Recovered",
+        "chronic": "Chronic",
+        "under_treatment": "Under Treatment"
     }
 }

@@ -10,7 +10,8 @@
         "status": "Status",
         "createdAt": "Created At",
         "clientBillsDescription": "Here you can see all the bills registered in the system for the client",
-        "searchBills": "Search bills..."
+        "searchBills": "Search bills...",
+        "created": "Bill Created successfully"
     },
     "paymentStates": {
         "paid": "Paid",
