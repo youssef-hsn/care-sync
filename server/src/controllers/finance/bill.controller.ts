@@ -7,34 +7,48 @@ import { db } from "@/db";
 import { billReasons, bills, sharesBills, usedMachines } from "@/db/tables/finance";
 
 export const getBills: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
-    const { page, size } = req.query;
-    const bills = await BillModel.getBills({ page: Number(page), size: Number(size) });
-    res.status(200).json(bills);
+    try {
+        const { page, size, search } = req.query;
+        const bills = await BillModel.getBills({ 
+            page: Number(page), 
+            size: Number(size), 
+            search: search as string
+        });
+        res.status(200).json(bills);
+    } catch (error) {
+        console.error('Error in getBills:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 
 export const getBill: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
-    const { billId } = req.params;
-    const bill = await BillModel.getBill(Number(billId));
-    if (!bill) {
-        res.status(404).json({ message: "Bill not found" });
-        return;
+    try {
+        const { billId } = req.params;
+        const bill = await BillModel.getBill(Number(billId));
+        if (!bill) {
+            res.status(404).json({ message: "Bill not found" });
+            return;
+        }
+
+        if (bill.clientId !== req.user?.userId && !hasRoleOrAdmin(req.user as TokenPayload, "Associate")) {
+            res.status(403).json({ message: "You are not authorized to view this bill" });
+            return;
+        }
+
+        const billDetails = await BillModel.getBillDetails(Number(billId));
+
+        res.status(200).json({...bill, billDetails});
+    } catch (error) {
+        console.error('Error in getBill:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    if (bill.clientId !== req.user?.userId && !hasRoleOrAdmin(req.user as TokenPayload, "Associate")) {
-        res.status(403).json({ message: "You are not authorized to view this bill" });
-        return;
-    }
-
-    const billDetails = await BillModel.getBillDetails(Number(billId));
-
-    res.status(200).json({...bill, billDetails});
 }
 
 export const createBill: RequestHandler = async (req: AuthenticatedRequest, res: Response) => {
     try {
         const bill = req.body;
         const parsed = billSchema.safeParse(bill);
-        console.log(parsed.error);
+        
         if (!parsed.success) {
             res.status(400).json({ message: parsed.error.message });
             return;
@@ -78,9 +92,8 @@ export const createBill: RequestHandler = async (req: AuthenticatedRequest, res:
             machines: machineUses,
             beneficiaries: beneficiariesShares,
         });
-
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        console.error('Error in createBill:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 }
