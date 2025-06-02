@@ -18,6 +18,7 @@ export const CreateServiceForm = ({onComplete}: {onComplete: () => void}) => {
             name: "",
             description: "",
             price: 0,
+            associateShare: 0,
         },
     });
 
@@ -71,6 +72,22 @@ export const CreateServiceForm = ({onComplete}: {onComplete: () => void}) => {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Price</FormLabel>
+                            <FormControl>
+                                <Input {...field} onChange={(e) => {
+                                    field.onChange(Number(e.target.value));
+                                    form.setValue("associateShare", Number(e.target.value) * 0.2);
+                                }} type="number" />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="associateShare"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Associate Share</FormLabel>
                             <FormControl>
                                 <Input {...field} onChange={(e) => {
                                     field.onChange(Number(e.target.value));

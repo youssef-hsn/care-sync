@@ -4,14 +4,14 @@ import { machineSchema } from "caresync/validations/machine.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/atoms/form";
 import { Input } from "@/components/atoms/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Button } from "@/components/atoms/button";
 import { toast } from "sonner";
 
 
 export const CreateMachineForm = ({onComplete}: {onComplete: () => void}) => {
-
+    const queryClient = useQueryClient();
     const form = useForm<z.infer<typeof machineSchema>>({
         resolver: zodResolver(machineSchema),
         defaultValues: {
@@ -31,6 +31,7 @@ export const CreateMachineForm = ({onComplete}: {onComplete: () => void}) => {
 
     const onSubmit = (data: z.infer<typeof machineSchema>) => {
         createService(data);
+        queryClient.invalidateQueries({ queryKey: ["Machines"] });
         toast.success("Machine created successfully");
         onComplete();
     }

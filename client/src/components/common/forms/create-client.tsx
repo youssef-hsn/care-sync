@@ -4,17 +4,18 @@ import { clientSchema } from "caresync/validations/user.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/atoms/form";
 import { Input } from "@/components/atoms/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/lib/api";
 import { Button } from "@/components/atoms/button";
 import { toast } from "sonner";
 import { DropdownInput } from "@/components/organisms/dropdown-input";
 import { User } from "caresync/types/user";
-import { PersonCard } from "../../../pages/app/finance/components/cards/person-card";
+import { PersonCard } from "@/pages/app/finance/components/cards/person-card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/atoms/select";
 
 
 export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
+    const queryClient = useQueryClient();
 
     const form = useForm<z.infer<typeof clientSchema>>({
         resolver: zodResolver(clientSchema),
@@ -33,9 +34,10 @@ export const CreateClientForm = ({onComplete}: {onComplete: () => void}) => {
         },
         onSuccess: () => {
             toast.success("Client created successfully");
+            queryClient.invalidateQueries({ queryKey: ["clients"] });
             onComplete();
         },
-        onError: (error) => {
+        onError: (error: any) => {
             const m = JSON.parse(error.response.data.message);
             m.forEach((message: any) => {
                 toast.error(message.path[0] + " " + message.message);
