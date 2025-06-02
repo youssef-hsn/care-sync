@@ -2,23 +2,26 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/atoms/card';
 import { useTranslation } from 'react-i18next';
-import { getMyBills } from '@/services/finance/bill.service';
+import { getClientBills } from '@/services/finance/bill.service';
 import { DataTable } from '@/components/molecules/data-table';
 import { useNavigate } from 'react-router-dom';
 import { BILLS_BASE_URI } from '@/lib/constants/pages/views';
 import { Bill } from 'caresync/types/bill';
 import { PaymentStatus } from '@/components/molecules/displays/status/payment-status';
 import { DateTimeDisplay } from '@/components/molecules/displays/date-display';
+import { useIdentityStore } from '@/lib/stores/identity.store';
 
 const BillsPage: React.FC = () => {
   const { t } = useTranslation("finance");
+
+  const { id } = useIdentityStore();
 
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
     queryKey: ['bills'],
     queryFn: async () => {
-      return await getMyBills({ page: 0, size: 10 })},
+      return await getClientBills(id!, { page: 1, size: 10 })},
     refetchOnWindowFocus: true,
   });
 

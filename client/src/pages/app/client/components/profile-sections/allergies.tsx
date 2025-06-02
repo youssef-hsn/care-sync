@@ -1,53 +1,27 @@
-import React from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/atoms/card";
-import { DataTable } from "@/components/molecules/data-table";
 import { DateTimeDisplay } from "@/components/molecules/displays/date-display";
+import { SectionProps } from "./section-props";
+import { createGetter } from "@/services/client.service";
+import { TableCard } from "@/components/organisms/table-card";
+import { AllergyActions } from "../tools/allergy-actions";
 
-interface AllergiesCardProps {
-    clientID?: number;
-    className?: string;
-}
+export const getAllergies = createGetter("allergies")
 
-export const allergies = [ // TODO: remove this dummy
-    {
-        id: 1,
-        name: 'Peanuts',
-        discoveryDate: new Date('2023-10-01'),
-    },
-    {
-        id: 2,
-        name: 'Shellfish',
-        discoveryDate: new Date('2023-10-01'),
-    },
-    {
-        id: 3,
-        name: 'Penicillin',
-        discoveryDate: new Date('2023-10-01'),
-    },
-    {
-        id: 4,
-        name: 'Latex',
-        discoveryDate: new Date('2023-10-01'),
-    },
-];
-
-export const AllergiesCard: React.FC<AllergiesCardProps> = ({ className })=> (
-    <Card className={className}>
-        <CardHeader>
-            <CardTitle>Allergies</CardTitle>
-        </CardHeader>
-        <CardContent>
-            <DataTable
-                data={allergies}
-                columns={[
-                    { label: 'id' },
-                    { label: 'name' },
-                    {
-                        label: 'discoveryDate',
-                        display: DateTimeDisplay
-                    },
-                ]}
-            />
-        </CardContent>
-    </Card>
-);
+export const AllergiesCard: React.FC<SectionProps> = ({ className, clientID }) => {
+    return (
+        <TableCard 
+            title="Allergies"
+            clientID={clientID}
+            service={getAllergies}
+            columns={[
+                { label: 'name' },
+                { label: 'severity' },
+                {
+                    label: 'discoveryDate',
+                    display: DateTimeDisplay
+                },
+            ]}
+            className={className}
+            actions={<AllergyActions clientID={clientID} />}
+        />
+    );
+};
