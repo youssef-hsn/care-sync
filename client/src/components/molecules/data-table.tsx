@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next"
 export type TableColumn = {
     label: string
     display?: React.FC<{ value: any }>
+    header?: string
 }
 
 export interface DataTableProps<Data extends Record<string, any>> {
@@ -39,7 +40,6 @@ export function DataTable<Data extends Record<string, any>>({
         return <div className="text-muted-foreground text-center py-4">No columns defined</div>
     }
 
-
     return (
         <Table className={className}>
             {caption && <caption className="caption-top mb-2">{caption}</caption>}
@@ -47,28 +47,29 @@ export function DataTable<Data extends Record<string, any>>({
                 <TableRow>
                     {Array.from(columns).map((column) => (
                         <TableHead key={column.label}>
-                            {t(column.label)}
+                            {t(column.header ?? column.label)}
                         </TableHead>
                     ))}
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {data && data.map((item, rowIndex) => (
+                {(data && data.length > 0) && data.map((item, rowIndex) => (
                     <TableRow 
                         key={rowIndex}
                         onClick={onRowClick ? () => onRowClick(item) : undefined}
                         className={onRowClick ? "cursor-pointer" : ""}
                     >
-                        {columns.map(({label, display: Display}) => (
-                            <TableCell key={`${rowIndex}-${label}`}>
+                        {columns.map(({label, display: Display}) => {
+                            console.log({item, label, columns})
+                            return (<TableCell key={`${rowIndex}-${label}`}>
                                 {Display
                                 ? <Display value={item[label]} />
-                                : item[label].toString()}
-                            </TableCell>
-                        ))}
+                                : item[label].toString() ?? "-"}
+                            </TableCell>)
+    })}
                     </TableRow>
                 ))}
-                {((!data || data.length === 0) && !isLoading) && <TableRow>
+                {((!data || !data.length) && !isLoading) && <TableRow>
                         <TableCell colSpan={columns.length} className="text-center">
                             {t("no-data")}
                         </TableCell>
